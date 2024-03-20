@@ -1,5 +1,5 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { NavigationContainer } from '@react-navigation/native'
 import Navigation from './src/Navigation/Navigation'
