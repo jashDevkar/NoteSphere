@@ -22,35 +22,42 @@ const Chapters = ({ navigation }) => {
                 const doccument = snapshot.docs.map(doc => doc.data())
                 setPdfData(doccument)
                 setActivity(false)
+
             }
             getData()
+
         } catch (error) {
             console.log("Error fetching in data ", error);
             setErrorMssg(true)
         }
     }, [])
+
+
+
     return (
-        <View style={{ flex: 1,backgroundColor:'#F5F5F5'}}>
+        <View style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
             {
                 errorMssg ?
                     <RenderError />
                     :
                     activity ?
-                        <Activity/>
+                        <Activity />
                         :
-
-                        <ScrollView style={{ backgroundColor: '#f5f5f5' }}>
-                            <View style={styles.container}>
-                                {
-                                    pdfData.map((item, index) => (
-                                        <TouchableOpacity key={index} onPress={() => navigation.navigate('Pdf', { param: item['File_path'] })} style={styles.card2}>
-                                            <Text style={styles.cardText}>{item['Name']}</Text>
-                                            <Image source={require('../../Assets/Images/right.png')} style={styles.rightArrow} />
-                                        </TouchableOpacity>
-                                    ))
-                                }
-                            </View>
-                        </ScrollView>
+                        pdfData.length == 0 ?
+                            <RenderError />
+                            :
+                            <ScrollView style={{ backgroundColor: '#f5f5f5' }}>
+                                <View style={styles.container}>
+                                    {
+                                        pdfData.map((item, index) => (
+                                            <TouchableOpacity key={index} onPress={() => navigation.navigate('Pdf', { param: item['File_path'] })} style={styles.card2}>
+                                                <Text style={styles.cardText}>{item['Name']}</Text>
+                                                <Image source={require('../../Assets/Images/right.png')} style={styles.rightArrow} />
+                                            </TouchableOpacity>
+                                        ))
+                                    }
+                                </View>
+                            </ScrollView>
             }
         </View>
     )

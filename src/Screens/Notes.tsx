@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import { NoteList } from '../Data/YearList'

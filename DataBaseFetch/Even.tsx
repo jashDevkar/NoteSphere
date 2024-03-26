@@ -34,22 +34,22 @@ const Even = () => {
     }, [])
 
     return (
-        <View style={{ flex: 1 ,backgroundColor:"#F5F5F5"}}>
+        <View style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
             {
                 errorMssg ?
-                    <RenderError/>
+                    <RenderError />
                     :
                     activity ?
-                        <Activity/>
+                        <Activity />
                         :
                         <ScrollView>
                             <View style={styles.container}>
                                 {
                                     subjectData.map((item, index) =>
                                         <TouchableOpacity key={index} style={styles.card2}
-                                            onPress={() => navigation.navigate('Chapters',{ subjectName:item, render:param.render,year:param.year })}>
+                                            onPress={() => navigation.navigate('Chapters', { subjectName: item, render: param.render, year: param.year })}>
                                             <Text style={styles.cardText}>{item}</Text>
-                                            <Image style={styles.rightArrow} source={require('../Assets/Images/right.png')}/>
+                                            <Image style={styles.rightArrow} source={require('../Assets/Images/right.png')} />
                                         </TouchableOpacity>)
                                 }
                             </View>
