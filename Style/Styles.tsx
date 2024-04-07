@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         paddingTop:32,
         paddingHorizontal:16,
         alignItems:'center',
-        gap:64,
+        gap:32,
         elevation:16,
         paddingBottom:16,
         borderRadius:16
@@ -86,6 +86,10 @@ const styles = StyleSheet.create({
     },
     loadingText:{
         color:'#000000'
+    },
+    errormssg:{
+        fontWeight:'300',
+        color:'black',
     }
 })
 

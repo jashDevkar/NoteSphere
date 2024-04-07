@@ -1,7 +1,5 @@
-import { StatusBar, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect,useState } from 'react'
-import firestore from '@react-native-firebase/firestore'
-import { NavigationContainer } from '@react-navigation/native'
+import { StatusBar } from 'react-native'
+import React from 'react'
 import Navigation from './src/Navigation/Navigation'
 import {  SafeAreaProvider } from 'react-native-safe-area-context'
 

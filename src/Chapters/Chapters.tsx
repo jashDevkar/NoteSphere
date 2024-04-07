@@ -5,14 +5,17 @@ import firestore from '@react-native-firebase/firestore'
 import styles from '../../Style/Styles'
 import Activity from '../../DataBaseFetch/FetchingActivity'
 import RenderError from '../../DataBaseFetch/RenderError'
+import NetInfo from '@react-native-community/netinfo'
 
 
 const Chapters = ({ navigation }) => {
     const route = useRoute();
+    const mssg = 'No data available'
     const data = route.params;  //{data:{subjectName:subjectname,render:Notes,year:SE}}
     const [pdfData, setPdfData] = useState([])
     const [activity, setActivity] = useState(false)
     const [errorMssg, setErrorMssg] = useState(false)
+    const [isConnected, setIsConnected] = useState(false)
 
     useEffect(() => {
         try {
@@ -24,7 +27,20 @@ const Chapters = ({ navigation }) => {
                 setActivity(false)
 
             }
-            getData()
+            const checkInternet = async () => {
+                const state = await NetInfo.fetch();
+                if (state.isConnected == false) {
+                    setIsConnected(state.isConnected)
+                    return false
+                }
+                else if (state.isConnected == true) {
+                    setIsConnected(state.isConnected)
+                    return true
+                }
+            };
+            if (checkInternet()) {
+                getData()
+            }
 
         } catch (error) {
             console.log("Error fetching in data ", error);
@@ -37,27 +53,30 @@ const Chapters = ({ navigation }) => {
     return (
         <View style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
             {
-                errorMssg ?
-                    <RenderError />
+                isConnected == false ?
+                    <RenderError mssg={'No internet connection'} homeState={true} />
                     :
-                    activity ?
-                        <Activity />
+                    errorMssg ?
+                        <RenderError mssg={'There was an error in fetching data'} />
                         :
-                        pdfData.length == 0 ?
-                            <RenderError />
+                        activity ?
+                            <Activity />
                             :
-                            <ScrollView style={{ backgroundColor: '#f5f5f5' }}>
-                                <View style={styles.container}>
-                                    {
-                                        pdfData.map((item, index) => (
-                                            <TouchableOpacity key={index} onPress={() => navigation.navigate('Pdf', { param: item['File_path'] })} style={styles.card2}>
-                                                <Text style={styles.cardText}>{item['Name']}</Text>
-                                                <Image source={require('../../Assets/Images/right.png')} style={styles.rightArrow} />
-                                            </TouchableOpacity>
-                                        ))
-                                    }
-                                </View>
-                            </ScrollView>
+                            pdfData.length === 0 ?
+                                <RenderError mssg={mssg} homeState={false} />
+                                :
+                                <ScrollView style={{ backgroundColor: '#f5f5f5' }}>
+                                    <View style={styles.container}>
+                                        {
+                                            pdfData.map((item, index) => (
+                                                <TouchableOpacity key={index} onPress={() => navigation.navigate('Pdf', { param: item['File_path'] })} style={styles.card2}>
+                                                    <Text style={styles.cardText}>{item['Name']}</Text>
+                                                    <Image source={require('../../Assets/Images/right.png')} style={styles.rightArrow} />
+                                                </TouchableOpacity>
+                                            ))
+                                        }
+                                    </View>
+                                </ScrollView>
             }
         </View>
     )
