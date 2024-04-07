@@ -12,7 +12,20 @@
           "package_name": "com.notessphere"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "407616728383-pms6bd1kqhke0s8v49uidbaqku5eisj3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notessphere",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "407616728383-snk0nf7neee6ffvkh6f8qjvmdekseg7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDLYYlS494FoAcIorFVZje3UYPeUYWOoLQ"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407616728383-snk0nf7neee6ffvkh6f8qjvmdekseg7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
