@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,6 +12,9 @@ import PdfRender from '../../Pdf/Pdf';
 import Chapters from '../Chapters/Chapters';
 import UnderConstruction from '../Screens/UnderConstruction';
 import About from '../Components/About';
+import Signin from '../../Google/Signin';
+import Splash from '../Components/Splash';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -19,21 +22,23 @@ const Tab = createBottomTabNavigator();
 const StackNav = () => {
     return (
         <Stack.Navigator
-        screenOptions={{
-            gestureEnabled:true,
-            gestureDirection:'horizontal',
-            
-        }}>
+            screenOptions={{
+                gestureEnabled: true,
+                gestureDirection: 'horizontal',
+
+            }}>
             <Stack.Screen name='BottomNavBar' component={BottomNav}
                 options={{
                     headerShown: false,
                 }} />
-            <Stack.Screen name='Notes' component={Notes}/>
+
+            <Stack.Screen name='Notes' component={Notes} />
             <Stack.Screen name='Subjects' component={Subjects} />
             <Stack.Screen name='Pdf' component={PdfRender} />
             <Stack.Screen name='Chapters' component={Chapters} />
             <Stack.Screen name='Construction' component={UnderConstruction} />
-            <Stack.Screen name='About-Us' component={About}/>
+            <Stack.Screen name='About-Us' component={About} />
+            <Stack.Screen name='SignIn' component={Signin} />
         </Stack.Navigator>
     )
 }
@@ -42,17 +47,18 @@ const StackNav = () => {
 const BottomNav = () => {
     return (
         <Tab.Navigator
-        screenOptions={{
-            tabBarShowLabel:false,
-            tabBarStyle:{
-                ... styles.tab}
-            
-        }}
-            >
+            screenOptions={{
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    ...styles.tab
+                }
+
+            }}
+        >
             <Tab.Screen name='Home' component={Home}
                 options={{
-                    headerStyle:{
-                        shadowColor:'#000000',
+                    headerStyle: {
+                        shadowColor: '#000000',
                     },
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.image_container}>
@@ -69,8 +75,8 @@ const BottomNav = () => {
 
             <Tab.Screen name='Downloads' component={Download}
                 options={{
-                    headerStyle:{
-                        shadowColor:'#000000',
+                    headerStyle: {
+                        shadowColor: '#000000',
                     },
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.image_container}>
@@ -87,8 +93,8 @@ const BottomNav = () => {
 
             <Tab.Screen name='Settings' component={Settings}
                 options={{
-                    headerStyle:{
-                        shadowColor:'#000000',
+                    headerStyle: {
+                        shadowColor: '#000000',
                     },
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.image_container}>
@@ -111,9 +117,12 @@ const BottomNav = () => {
 
 const Navigation = () => {
     return (
-        <NavigationContainer>
+
+        
             <StackNav />
-        </NavigationContainer>
+       
+
+
     )
 }
 
@@ -140,8 +149,8 @@ const styles = StyleSheet.create({
         elevation: 24,
         height: 64,
     },
-    titleStyle:{
-        color:'#000000'
+    titleStyle: {
+        color: '#000000'
     }
 })
 

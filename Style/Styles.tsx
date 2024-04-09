@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Signin from "../Google/Signin";
 
 //common styles for list
 const styles = StyleSheet.create({
@@ -90,7 +91,40 @@ const styles = StyleSheet.create({
     errormssg:{
         fontWeight:'300',
         color:'black',
-    }
+    },
+    signIn:{
+       
+       flexDirection:'row',
+       alignItems:'center',
+       gap:10,
+       backgroundColor:'white',
+       paddingRight:10,
+       width:150,
+       justifyContent:'space-around',
+       elevation:8
+       
+    },
+    googleImg:{
+        height:50,
+        width:50,
+        borderColor:'white',
+        borderRadius:15
+    },
+    signOut:{
+       
+        flexDirection:'row',
+        alignItems:'center',
+        gap:10,
+        backgroundColor:'white',
+        padding:10,
+        width:150,
+        justifyContent:'space-around',
+        elevation:8,
+        borderRadius:10
+        
+     },
+
+
 })
 
 export default styles

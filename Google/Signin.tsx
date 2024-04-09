@@ -1,50 +1,51 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, Alert, Image } from 'react-native'
+import React, { useEffect } from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth';
-import { useNavigation } from '@react-navigation/native';
-import Navigation from '../src/Navigation/Navigation';
-
-
+import styles from '../Style/Styles';
 
 const Signin = () => {
 
-    const [userInfo, setUserInfo] = useState({})
     useEffect(() => {
         GoogleSignin.configure({
-            webClientId: '407616728383-snk0nf7neee6ffvkh6f8qjvmdekseg7i.apps.googleusercontent.com',
+            webClientId: "407616728383-u21l0fvec03mvgk8mdrm4dascd8d0ri9.apps.googleusercontent.com",
         })
+
     }, [])
 
-
     async function onGoogleButtonPress() {
-        await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-        const meta = await GoogleSignin.signIn();
-        setUserInfo(meta.user)
-        const googleCredential = auth.GoogleAuthProvider.credential(meta.idToken);
-        auth().signInWithCredential(googleCredential);
-        
-        
-    }
-    const signOut = async () => {
         try {
-            await GoogleSignin.signOut();
-            setUserInfo({}); //removing user
+            await GoogleSignin.hasPlayServices();
+            const meta = await GoogleSignin.signIn();
+            const googleCredential = auth.GoogleAuthProvider.credential(meta.idToken);
+            await auth().signInWithCredential(googleCredential)
         } catch (error) {
-            console.error(error);
+            if (error?.code == statusCodes.SIGN_IN_CANCELLED) {
+                Alert.alert('SignIn Cancelled')
+            } else if (error?.code === statusCodes.IN_PROGRESS) {
+
+            } else if (error?.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                Alert.alert('Play service not detected')
+            } else {
+                Alert.alert('Error occured while signing in',error?.code)
+            }
+
         }
-    };
+
+
+
+    }
+
+
 
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => { onGoogleButtonPress() }}>
-                <Text>SignIn</Text>
+            <Text>Fast And Secure</Text>
+            <TouchableOpacity onPress={onGoogleButtonPress} style={styles.signIn}>
+                <Image source={require('../Assets/Images/google.png')} style={styles.googleImg} />
+                <Text>Sign In</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { signOut() }}>
-                <Text>Signout</Text>
-            </TouchableOpacity>
-            {userInfo!=null && <Text>{userInfo.name}</Text>}
         </View>
     )
 }

@@ -14,15 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "407616728383-pms6bd1kqhke0s8v49uidbaqku5eisj3.apps.googleusercontent.com",
+          "client_id": "407616728383-i3dd6r8kd81ghvun4d82jh3l87j5fcbe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.notessphere",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "aa586e4af3021e5248fc5ddc65c48faf53f58662"
           }
         },
         {
-          "client_id": "407616728383-snk0nf7neee6ffvkh6f8qjvmdekseg7i.apps.googleusercontent.com",
+          "client_id": "407616728383-u21l0fvec03mvgk8mdrm4dascd8d0ri9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
