@@ -104,6 +104,9 @@ const styles = StyleSheet.create({
        elevation:8
        
     },
+    signInTxt:{
+
+    },
     googleImg:{
         height:50,
         width:50,
@@ -115,14 +118,27 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         gap:10,
-        backgroundColor:'white',
+        backgroundColor:'red',
         padding:10,
         width:150,
         justifyContent:'space-around',
         elevation:8,
-        borderRadius:10
+        borderRadius:10,
         
      },
+     signOutTxt:{
+        color:'white'
+     },
+     infoCard:{
+        backgroundColor:'white',
+        elevation:8,
+        padding:20,
+        borderRadius:10,
+        gap:10
+     },
+     infoTxt:{
+        color:'black'
+     }
 
 
 })

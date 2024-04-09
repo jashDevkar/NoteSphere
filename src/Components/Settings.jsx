@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import { GoogleSignin} from '@react-native-google-signin/google-signin'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth';
 import React, { useEffect, useState } from 'react'
 import moment from 'moment-timezone';
@@ -7,7 +7,7 @@ import styles from '../../Style/Styles';
 
 const Settings = () => {
 
-  const [istTime,setIstTime]=useState(null)
+  const [istTime, setIstTime] = useState(null)
   const signOut = async () => {
     try {
 
@@ -20,7 +20,7 @@ const Settings = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const login = auth().currentUser?.metadata.lastSignInTime
     const istLoginTime = moment(login).tz('Asia/Kolkata').format('HH:mm:ss DD-MM-YYYY');
     setIstTime(istLoginTime)
@@ -30,11 +30,18 @@ const Settings = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 10, backgroundColor: '#F5F5F5' }}>
-      <Text>{auth().currentUser?.email}</Text>
-      <Text>{auth().currentUser?.displayName}</Text>
-      <Text>last sign In :{istTime}</Text>
+      <View style={styles.infoCard}>
+        <View style={{ alignItems: 'center' }}>
+          <Image source={{ uri: auth().currentUser.photoURL }} width={100} height={100} borderRadius={50} />
+        </View>
+        <View gap={5}>
+          <Text style={styles.infoTxt}>Name:-  {auth().currentUser?.displayName}</Text>
+          <Text style={styles.infoTxt}>Email:-  {auth().currentUser?.email}</Text>
+          <Text style={styles.infoTxt}>last sign In :- {istTime}</Text>
+        </View>
+      </View>
       <TouchableOpacity onPress={signOut} style={styles.signOut}>
-        <Text>SignOut</Text>
+        <Text style={styles.signOutTxt}>SignOut</Text>
       </TouchableOpacity>
     </View>
   )

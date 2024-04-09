@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator()
 const Main = () => {
     const [user, setUser] = useState();
     useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(currentUser=> setUser(currentUser));
+        const subscriber = auth().onAuthStateChanged(user=> setUser(user));
         return subscriber;
     }, []);
 

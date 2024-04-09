@@ -31,20 +31,14 @@ const Signin = () => {
             }
 
         }
-
-
-
     }
-
-
-
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Fast And Secure</Text>
+            <Text style={{color:'black'}}>Fast And Secure</Text>
             <TouchableOpacity onPress={onGoogleButtonPress} style={styles.signIn}>
                 <Image source={require('../Assets/Images/google.png')} style={styles.googleImg} />
-                <Text>Sign In</Text>
+                <Text style={{color:'black'}}>Sign In</Text>
             </TouchableOpacity>
         </View>
     )
