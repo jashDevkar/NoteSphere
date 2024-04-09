@@ -12,10 +12,8 @@ const Main = () => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(user => {
-            setUser(user);
-            setLoading(false);
-        });
+        const subscriber = auth().onAuthStateChanged(currentUser => setUser(currentUser));
+        setLoading(false)
         return subscriber;
     }, []);
 

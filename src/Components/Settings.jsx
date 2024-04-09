@@ -14,7 +14,6 @@ const Settings = () => {
       await GoogleSignin.signOut();
       await auth().signOut();
 
-
     } catch (error) {
       console.error(error);
     }
@@ -40,8 +39,8 @@ const Settings = () => {
           <Text style={styles.infoTxt}>last sign In :- {istTime}</Text>
         </View>
       </View>
-      <TouchableOpacity onPress={signOut} style={styles.signOut}>
-        <Text style={styles.signOutTxt}>SignOut</Text>
+      <TouchableOpacity onPress={()=>signOut()} style={styles.signOut}>
+        <Text style={styles.signOutTxt}>Sign Out</Text>
       </TouchableOpacity>
     </View>
   )
