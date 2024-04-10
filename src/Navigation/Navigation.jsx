@@ -1,8 +1,7 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Components/Home';
 import Download from '../Components/Download';
 import Settings from '../Components/Settings';
@@ -12,14 +11,14 @@ import PdfRender from '../../Pdf/Pdf';
 import Chapters from '../Chapters/Chapters';
 import UnderConstruction from '../Screens/UnderConstruction';
 import About from '../Components/About';
-import Signin from '../../Google/Signin';
-import Splash from '../Components/Splash';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
+import { useNavigation } from "@react-navigation/native";
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const StackNav = () => {
+    const navigation = useNavigation()
     return (
         <Stack.Navigator
             screenOptions={{
@@ -33,12 +32,21 @@ const StackNav = () => {
                 }} />
 
             <Stack.Screen name='Notes' component={Notes} />
-            <Stack.Screen name='Subjects' component={Subjects} />
+            <Stack.Screen name='Subjects' component={Subjects}
+            options={{headerRight:()=>(
+                <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
+                    <Image source={require('../../Assets/Images/home.png')} style={styles.homeImg}/>
+                </TouchableOpacity>
+            )}} />
             <Stack.Screen name='Pdf' component={PdfRender} />
-            <Stack.Screen name='Chapters' component={Chapters} />
+            <Stack.Screen name='Chapters' component={Chapters} 
+            options={{headerRight:()=>(
+                <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
+                    <Image source={require('../../Assets/Images/home.png')} style={styles.homeImg}/>
+                </TouchableOpacity>
+            )}}/>
             <Stack.Screen name='Construction' component={UnderConstruction} />
             <Stack.Screen name='About-Us' component={About} />
-            <Stack.Screen name='SignIn' component={Signin} />
         </Stack.Navigator>
     )
 }
@@ -117,12 +125,7 @@ const BottomNav = () => {
 
 const Navigation = () => {
     return (
-
-        
             <StackNav />
-       
-
-
     )
 }
 
@@ -131,8 +134,8 @@ const Navigation = () => {
 
 const styles = StyleSheet.create({
     bottom_image: {
-        width: 32,
-        height: 32,
+        width: 24,
+        height: 24,
     },
     image_container: {
         flex: 1,
@@ -151,6 +154,11 @@ const styles = StyleSheet.create({
     },
     titleStyle: {
         color: '#000000'
+    },
+    homeImg:{
+        width:30,
+        height:30,
+        tintColor:'#404040'
     }
 })
 

@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import styles from "../Style/Styles";
 import { useNavigation } from "@react-navigation/native";
 
-const RenderError = (props): React.JSX.Element => {
+const RenderError = (props)=> {
     const navigation = useNavigation();
     return (
         <View style={styles.errorContainer}>

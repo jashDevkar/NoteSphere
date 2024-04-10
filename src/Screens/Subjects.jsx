@@ -16,7 +16,7 @@ const Subjects = () => {
     )
 }
 
-const BottomNav = ({param}) => {  //{year: {year:SE}} after disintigration year={year:SE}
+const BottomNav = ({param}) => { 
 
     // console.log(param)  //{Year:SE,render:notes}
 
@@ -75,8 +75,8 @@ const BottomNav = ({param}) => {  //{year: {year:SE}} after disintigration year=
 }
 const styles = StyleSheet.create({
     bottom_image: {
-        width: 32,
-        height: 32,
+        width: 24,
+        height: 24,
     },
     image_container: {
         flex: 1,
