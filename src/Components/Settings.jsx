@@ -2,12 +2,11 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth';
 import React, { useEffect, useState } from 'react'
-import moment from 'moment-timezone';
 import styles from '../../Style/Styles';
 
 const Settings = () => {
 
-  const [istTime, setIstTime] = useState(null)
+  const [time, setTime] = useState(null)
   const signOut = async () => {
     try {
 
@@ -21,8 +20,7 @@ const Settings = () => {
 
   useEffect(() => {
     const login = auth().currentUser?.metadata.lastSignInTime
-    const istLoginTime = moment(login).tz('Asia/Kolkata').format('HH:mm:ss DD-MM-YYYY');
-    setIstTime(istLoginTime)
+    setTime(new Date(login).toLocaleString())
 
   })
 
@@ -36,7 +34,7 @@ const Settings = () => {
         <View gap={5}>
           <Text style={styles.infoTxt}>Name:-  {auth().currentUser?.displayName}</Text>
           <Text style={styles.infoTxt}>Email:-  {auth().currentUser?.email}</Text>
-          <Text style={styles.infoTxt}>last sign In :- {istTime}</Text>
+          <Text style={styles.infoTxt}>last sign In :- {time}</Text>
         </View>
       </View>
       <TouchableOpacity onPress={()=>signOut()} style={styles.signOut}>
