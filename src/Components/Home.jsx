@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, ScrollView, Image, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Image} from 'react-native'
 import React from 'react'
 import { YearList } from '../Data/YearList'
 import styles from '../../Style/Styles'

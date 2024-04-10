@@ -33,18 +33,22 @@ const StackNav = () => {
 
             <Stack.Screen name='Notes' component={Notes} />
             <Stack.Screen name='Subjects' component={Subjects}
-            options={{headerRight:()=>(
-                <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
-                    <Image source={require('../../Assets/Images/home.png')} style={styles.homeImg}/>
-                </TouchableOpacity>
-            )}} />
+                options={{
+                    headerRight: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                            <Image source={require('../../Assets/Images/home.png')} style={styles.homeImg} />
+                        </TouchableOpacity>
+                    )
+                }} />
             <Stack.Screen name='Pdf' component={PdfRender} />
-            <Stack.Screen name='Chapters' component={Chapters} 
-            options={{headerRight:()=>(
-                <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
-                    <Image source={require('../../Assets/Images/home.png')} style={styles.homeImg}/>
-                </TouchableOpacity>
-            )}}/>
+            <Stack.Screen name='Chapters' component={Chapters}
+                options={{
+                    headerRight: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                            <Image source={require('../../Assets/Images/home.png')} style={styles.homeImg} />
+                        </TouchableOpacity>
+                    )
+                }} />
             <Stack.Screen name='Construction' component={UnderConstruction} />
             <Stack.Screen name='About-Us' component={About} />
         </Stack.Navigator>
@@ -122,10 +126,9 @@ const BottomNav = () => {
 }
 
 
-
 const Navigation = () => {
     return (
-            <StackNav />
+        <StackNav />
     )
 }
 
@@ -155,10 +158,10 @@ const styles = StyleSheet.create({
     titleStyle: {
         color: '#000000'
     },
-    homeImg:{
-        width:30,
-        height:30,
-        tintColor:'#404040'
+    homeImg: {
+        width: 30,
+        height: 30,
+        tintColor: '#404040'
     }
 })
 

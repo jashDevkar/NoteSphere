@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import Signin from "../Google/Signin";
 
 //common styles for list
 const styles = StyleSheet.create({

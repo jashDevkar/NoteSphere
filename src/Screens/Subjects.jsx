@@ -1,12 +1,12 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useRoute } from '@react-navigation/native';
 import Even from '../../DataBaseFetch/Even';
 import Odd from '../../DataBaseFetch/Odd'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator()
 const Subjects = () => {
     const route = useRoute();
     const data = route.params  //data={year:SE,render:notes}
@@ -16,20 +16,20 @@ const Subjects = () => {
     )
 }
 
-const BottomNav = ({param}) => { 
+const BottomNav = ({ param }) => {
 
     // console.log(param)  //{Year:SE,render:notes}
 
     return (
-        <Tab.Navigator
+        <Tab.Navigator tabBarPosition='bottom'
             screenOptions={{
-                headerShown: false,
-                tabBarShowLabel: false,
-                tabBarStyle:{
-                    ... styles.tab
+
+                tabBarIndicatorStyle: {
+                    backgroundColor: 'black',
+                    position: 'top',
                 }
-            
             }}>
+
             <Tab.Screen name='Odd Sem' component={Odd}
                 initialParams={
                     {
@@ -38,17 +38,10 @@ const BottomNav = ({param}) => {
                 }
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={styles.image_container}>
-                            <Image source={require('../../Assets/Images/book.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
-                            {
-                                focused ?
-                                    <Text style={styles.titleStyle}>Odd Sem</Text>
-                                    :
-                                    null
-                            }
-                        </View>
+                        <Image source={require('../../Assets/Images/book.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
                     )
                 }}
+
             />
             <Tab.Screen name='Even Sem' component={Even}
                 initialParams={
@@ -58,17 +51,10 @@ const BottomNav = ({param}) => {
                 }
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={styles.image_container}>
-                            <Image source={require('../../Assets/Images/book.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
-                            {
-                                focused ?
-                                    <Text style={styles.titleStyle}>Even Sem</Text>
-                                    :
-                                    null
-                            }
-                        </View>
+                        <Image source={require('../../Assets/Images/book.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
                     )
                 }}
+
             />
         </Tab.Navigator>
     )

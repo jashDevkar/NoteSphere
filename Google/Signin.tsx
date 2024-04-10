@@ -1,8 +1,8 @@
-import { View, Text, TouchableOpacity, Alert, Image } from 'react-native'
+import { View, Text, Alert, StyleSheet } from 'react-native'
 import React, { useEffect } from 'react'
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
+import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth';
-import styles from '../Style/Styles';
+
 
 const Signin = () => {
 
@@ -36,12 +36,19 @@ const Signin = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text style={{color:'black'}}>Fast And Secure</Text>
-            <TouchableOpacity onPress={onGoogleButtonPress} style={styles.signIn}>
-                <Image source={require('../Assets/Images/google.png')} style={styles.googleImg} />
-                <Text style={{color:'black'}}>Sign In</Text>
-            </TouchableOpacity>
+            <GoogleSigninButton onPress={()=>onGoogleButtonPress()} 
+            color={GoogleSigninButton.Color.Dark}
+            style={styles.SignInBtn}
+            disabled={false}/>
         </View>
     )
 }
+const styles = StyleSheet.create({
+    SignInBtn:{
+        width: 250,
+        height: 50,
+    }
+})
+
 
 export default Signin
