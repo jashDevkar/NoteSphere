@@ -112,17 +112,15 @@ const styles = StyleSheet.create({
         borderColor:'white',
         borderRadius:15
     },
-    signOut:{
-       
+    signOut:{  
         flexDirection:'row',
         alignItems:'center',
-        gap:10,
         backgroundColor:'red',
         padding:10,
-        width:150,
+        width:160,
         justifyContent:'space-around',
-        elevation:8,
-        borderRadius:10,
+        elevation:12,
+        borderRadius:8,
         
      },
      signOutTxt:{

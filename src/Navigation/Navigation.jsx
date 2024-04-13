@@ -63,9 +63,8 @@ const BottomNav = () => {
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     ...styles.tab
-                }
-
-            }}
+                },
+            }}            
         >
             <Tab.Screen name='Home' component={Home}
                 options={{

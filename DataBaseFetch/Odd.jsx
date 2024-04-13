@@ -39,18 +39,6 @@ const Odd = ({ navigation }) => {
                     return true
                 }
             };
-            // const checkInternet = NetInfo.addEventListener((state) => {
-            //     if (state.isConnected == false) {
-            //         console.log('not connected')
-            //         setIsConnected(state.isConnected)
-            //         return false
-            //     }
-            //     else if (state.isConnected == true) {
-            //         console.log('connected')
-            //         setIsConnected(state.isConnected)
-            //         return true
-            //     }
-            // })
             if (checkInternet()) {
                 getData()
             }
@@ -85,7 +73,6 @@ const Odd = ({ navigation }) => {
                                     }
                                 </View>
                             </ScrollView>
-
             }
         </View>
     )
