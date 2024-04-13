@@ -4,7 +4,7 @@ const Activity = () => {
     return (
         <View style={styles.loadingContainer}>
             <ActivityIndicator size={'large'} animating={true} color={'black'} />
-            <Text>Loading...</Text>
+            <Text style={styles.loadingText}>Loading...</Text>
         </View>
     )
 }

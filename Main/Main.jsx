@@ -9,28 +9,27 @@ import Activity from '../DataBaseFetch/FetchingActivity';
 
 const Stack = createNativeStackNavigator()
 const Main = () => {
-    const [user, setUser] = useState();
-    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(currentUser => setUser(currentUser));
-        setLoading(false)
+        const subscriber = auth().onAuthStateChanged(currentUser =>setUser(currentUser));
+        setLoading(false);
         return subscriber;
     }, []);
 
-
-    if(loading){
-        return(
-            <Activity/>
+    if (loading) {
+        return (
+            <Activity />
         )
     }
 
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {user != null ? <Stack.Screen name='Main' component={Navigation} options={{ headerShown: false }} />
-
-                    :
-                    <Stack.Screen name='Signin' component={Signin} />
+                {
+                    user ? <Stack.Screen name='MainComp' component={Navigation} options={{ headerShown: false }} />
+                        :
+                        <Stack.Screen name='Signin' component={Signin} />
                 }
             </Stack.Navigator>
         </NavigationContainer>
