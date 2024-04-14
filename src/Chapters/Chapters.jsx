@@ -6,6 +6,7 @@ import styles from '../../Style/Styles'
 import Activity from '../../DataBaseFetch/FetchingActivity'
 import RenderError from '../../DataBaseFetch/RenderError'
 import NetInfo from '@react-native-community/netinfo'
+import RNReactNativeHapticFeedback from 'react-native-haptic-feedback'
 
 
 const Chapters = ({ navigation }) => {
@@ -16,6 +17,10 @@ const Chapters = ({ navigation }) => {
     const [activity, setActivity] = useState(false)
     const [errorMssg, setErrorMssg] = useState(false)
     const [isConnected, setIsConnected] = useState(false)
+    const options = {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+    };
 
     useEffect(() => {
         try {
@@ -69,7 +74,10 @@ const Chapters = ({ navigation }) => {
                                     <View style={styles.container}>
                                         {
                                             pdfData.map((item, index) => (
-                                                <TouchableOpacity key={index} onPress={() => navigation.navigate('Pdf', { param: item['File_path'] })} style={styles.card2}>
+                                                <TouchableOpacity key={index} onPress={() => {
+                                                    navigation.navigate('Pdf', { param: item['File_path'] })
+                                                    RNReactNativeHapticFeedback.trigger("effectClick", options)
+                                                }} style={styles.card2}>
                                                     <Text style={styles.cardText}>{item['Name']}</Text>
                                                     <Image source={require('../../Assets/Images/right.png')} style={styles.rightArrow} />
                                                 </TouchableOpacity>

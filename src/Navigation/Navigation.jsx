@@ -12,6 +12,8 @@ import Chapters from '../Chapters/Chapters';
 import UnderConstruction from '../Screens/UnderConstruction';
 import About from '../Components/About';
 import { useNavigation } from "@react-navigation/native";
+import ReactNativeHapticFeedback from "react-native-haptic-feedback"
+import { enableScreens } from 'react-native-screens';
 
 
 const Stack = createNativeStackNavigator();
@@ -57,6 +59,10 @@ const StackNav = () => {
 
 
 const BottomNav = () => {
+    const options = {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      };
     return (
         <Tab.Navigator
             screenOptions={{
@@ -70,6 +76,7 @@ const BottomNav = () => {
                 options={{
                     headerStyle: {
                         shadowColor: '#000000',
+                        
                     },
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.image_container}>
@@ -80,7 +87,7 @@ const BottomNav = () => {
                                     : null
                             }
                         </View>
-                    )
+                    ),
                 }} />
 
 
@@ -106,6 +113,7 @@ const BottomNav = () => {
                 options={{
                     headerStyle: {
                         shadowColor: '#000000',
+                        
                     },
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.image_container}>
