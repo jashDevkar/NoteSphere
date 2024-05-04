@@ -12,8 +12,7 @@ import Chapters from '../Chapters/Chapters';
 import UnderConstruction from '../Screens/UnderConstruction';
 import About from '../Components/About';
 import { useNavigation } from "@react-navigation/native";
-import ReactNativeHapticFeedback from "react-native-haptic-feedback"
-import { enableScreens } from 'react-native-screens';
+
 
 
 const Stack = createNativeStackNavigator();
