@@ -78,7 +78,7 @@ const BottomNav = () => {
                         
                     },
                     tabBarIcon: ({ focused }) => (
-                        <View style={styles.image_container}>
+                        <View style={[styles.image_container]}>
                             <Image source={require('../../Assets/Images/home.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
                             {
                                 focused ?
@@ -100,7 +100,7 @@ const BottomNav = () => {
                             <Image source={require('../../Assets/Images/downloads.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
                             {
                                 focused ?
-                                    <Text style={styles.titleStyle}>Downloads</Text>
+                                    <Text style={styles.titleStyle}>Download</Text>
                                     : null
                             }
                         </View>
@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        gap:2,
     },
     tab: {
         position: 'absolute',
@@ -162,11 +163,12 @@ const styles = StyleSheet.create({
         height: 64,
     },
     titleStyle: {
-        color: '#000000'
+        color: '#000000',
+        fontSize:13
     },
     homeImg: {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
         tintColor: '#404040'
     }
 })

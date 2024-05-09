@@ -37,7 +37,7 @@ const Settings = () => {
   return (
 
 
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 16, backgroundColor: '#F5F5F5' }}>
+    <View style={{ flex: 1, alignItems: 'center', gap: 16, backgroundColor: '#F5F5F5',justifyContent:'center' }}>
       <View style={styles.infoCard}>
         {
           isConnected ?
@@ -53,14 +53,10 @@ const Settings = () => {
           <Text style={styles.infoTxt}>last sign In :- {time}</Text>
         </View>
       </View>
-      {
-        isConnected ?
-          <TouchableOpacity onPress={() => signOut()} style={styles.signOut}>
-            <Text style={styles.signOutTxt}>Sign Out</Text>
-          </TouchableOpacity>
-          :
-          null
-      }
+      <TouchableOpacity onPress={() => signOut()} style={styles.signOut}>
+        <Text style={styles.signOutTxt}>Sign Out</Text>
+      </TouchableOpacity>
+
     </View>
 
 
