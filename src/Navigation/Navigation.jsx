@@ -2,9 +2,6 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Home from '../Components/Home';
-import Download from '../Components/Download';
-import Settings from '../Components/Settings';
 import Notes from '../Screens/Notes';
 import Subjects from '../Screens/Subjects';
 import PdfRender from '../../Pdf/Pdf';
@@ -12,11 +9,14 @@ import Chapters from '../Chapters/Chapters';
 import UnderConstruction from '../Screens/UnderConstruction';
 import About from '../Components/About';
 import { useNavigation } from "@react-navigation/native";
+import { TabBarScreens } from '../Data/YearList';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator()
 
 const StackNav = () => {
     const navigation = useNavigation()
@@ -29,7 +29,13 @@ const StackNav = () => {
             }}>
             <Stack.Screen name='BottomNavBar' component={BottomNav}
                 options={{
-                    headerShown: false,
+                    headerTitle: 'Notes Sphere',
+                    headerTitleStyle: {
+                        color: 'black',
+                        fontWeight: '400',
+                        fontFamily: 'Roboto-Regular',
+
+                    },
                 }} />
 
             <Stack.Screen name='Notes' component={Notes} />
@@ -58,73 +64,43 @@ const StackNav = () => {
 
 
 const BottomNav = () => {
-    const options = {
-        enableVibrateFallback: true,
-        ignoreAndroidSystemSettings: false,
-      };
+
     return (
-        <Tab.Navigator
-            screenOptions={{
-                tabBarShowLabel: false,
+        <Tab.Navigator tabBarPosition='bottom'
+            headerShown={true}
+
+            screenOptions={({ route }) => ({
+                // tabBarShowLabel: false,
                 tabBarStyle: {
-                    ...styles.tab
+                    ...styles.tab,
                 },
-            }}            
+                tabBarLabelStyle: {
+                    color: 'grey',
+                },
+                tabBarLabel: ({ focused }) => (
+                    <Text style={{ fontSize: 12, color: focused ? 'black' : '#A9A9A9' }}>
+                        {route.name}
+                    </Text>
+                ),
+                tabBarIndicatorStyle: {
+                    height: 0,
+                }
+            })}
         >
-            <Tab.Screen name='Home' component={Home}
-                options={{
-                    headerStyle: {
-                        shadowColor: '#000000',
-                        
-                    },
-                    tabBarIcon: ({ focused }) => (
-                        <View style={[styles.image_container]}>
-                            <Image source={require('../../Assets/Images/home.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
-                            {
-                                focused ?
-                                    <Text style={styles.titleStyle}>Home</Text>
-                                    : null
-                            }
-                        </View>
-                    ),
-                }} />
+            {
+                TabBarScreens.map((item, index) => (
+                    <Tab.Screen name={item.name} component={item.comp} key={index}
 
+                        options={{
+                            tabBarIcon: ({ focused }) => (
+                                <Image source={item.icon}
+                                    style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
 
-            <Tab.Screen name='Downloads' component={Download}
-                options={{
-                    headerStyle: {
-                        shadowColor: '#000000',
-                    },
-                    tabBarIcon: ({ focused }) => (
-                        <View style={styles.image_container}>
-                            <Image source={require('../../Assets/Images/downloads.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
-                            {
-                                focused ?
-                                    <Text style={styles.titleStyle}>Download</Text>
-                                    : null
-                            }
-                        </View>
-                    )
-                }} />
-
-
-            <Tab.Screen name='Settings' component={Settings}
-                options={{
-                    headerStyle: {
-                        shadowColor: '#000000',
-                        
-                    },
-                    tabBarIcon: ({ focused }) => (
-                        <View style={styles.image_container}>
-                            <Image source={require('../../Assets/Images/setting.png')} style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
-                            {
-                                focused ?
-                                    <Text style={styles.titleStyle}>Setting</Text>
-                                    : null
-                            }
-                        </View>
-                    )
-                }} />
+                            ),
+                        }}
+                    />
+                ))
+            }
 
 
         </Tab.Navigator>
@@ -146,30 +122,20 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
     },
-    image_container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap:2,
-    },
     tab: {
         position: 'absolute',
         bottom: 24,
         left: 24,
         right: 24,
         borderRadius: 32,
-        paddingVertical: 0,
-        elevation: 24,
-        height: 64,
+        paddingVertical:'0.5%',
+        elevation: 4,
+        height:60,
+
     },
-    titleStyle: {
-        color: '#000000',
-        fontSize:13
-    },
-    homeImg: {
-        width: 25,
-        height: 25,
-        tintColor: '#404040'
+    homeImg:{
+        height:24,
+        width:24
     }
 })
 

@@ -13,7 +13,7 @@ const Notes = ({ navigation }) => {
   const { year } = data  //{SE}
   // console.log(data) //{year:SE}
 
-  const goTo = (render: string = "") => {
+  const goTo = (render = "") => {
     if (render != "" && year != "") { //checking if year clicked is SE or not
       navigation.navigate('Subjects', {
         year,

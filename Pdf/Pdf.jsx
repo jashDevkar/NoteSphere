@@ -13,19 +13,19 @@ const PdfRender = () => {
   const data = route.params;
   const { param } = data
   const file_path = param;
-  const source = { uri: file_path, cache: false }
+  const source = { uri: file_path, cache: true }
   const [isConnected, setIsConnected] = useState(false)
 
+  const checkInternet = async () => {
+    const state = await NetInfo.fetch();
+    if (state.isConnected == false) {
+      setIsConnected(state.isConnected)
+    }
+    else if (state.isConnected == true) {
+      setIsConnected(state.isConnected)
+    }
+  }
   useEffect(() => {
-    const checkInternet = async () => {
-      const state = await NetInfo.fetch();
-      if (state.isConnected == false) {
-        setIsConnected(state.isConnected)
-      }
-      else if (state.isConnected == true) {
-        setIsConnected(state.isConnected)
-      }
-    };
     checkInternet()
   }, [])
 

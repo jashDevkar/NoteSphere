@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useRoute } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore'
 import RenderError from './RenderError';
@@ -8,8 +8,11 @@ import Activity from './FetchingActivity';
 import NetInfo from '@react-native-community/netinfo'
 import RNReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
+
+
 const Even = ({ navigation }) => {
 
+    const [isConnected, setIsConnected] = useState(false)
     const route = useRoute();
     const semType = 'Even'
     const data = route.params;   //data={param:{year:SE,render:notes}}
@@ -17,11 +20,22 @@ const Even = ({ navigation }) => {
     const [activity, setActivity] = useState(false)
     const [errorMssg, setErrorMssg] = useState(false)
     const [subjectData, setSubjectData] = useState([])
-    const [isConnected, setIsConnected] = useState(false)
+
     const options = {
         enableVibrateFallback: true,
         ignoreAndroidSystemSettings: false,
     };
+
+    const checkInternet = async () => {
+        const state = await NetInfo.fetch();
+        if (state.isConnected == false) {
+            setIsConnected(state.isConnected)
+
+        }
+        else if (state.isConnected == true) {
+            setIsConnected(state.isConnected)
+        }
+    }
 
     useEffect(() => {
         try {
@@ -33,32 +47,39 @@ const Even = ({ navigation }) => {
                 setActivity(false)
 
             }
-            const checkInternet = async () => {
-                const state = await NetInfo.fetch();
-                if (state.isConnected == false) {
-                    setIsConnected(state.isConnected)
-                    return false
-                }
-                else if (state.isConnected == true) {
-                    setIsConnected(state.isConnected)
-                    return true
-                }
-            };
-            if (checkInternet()) {
-                getData()
+            if (!isConnected) {
+                checkInternet();
             }
+            if (isConnected) {
+                getData();
+            }
+
         } catch (error) {
             setErrorMssg(true)
             console.log('error fetching data ', error)
         }
 
-    }, [])
+    }, [isConnected])
+
+    const Refresh = (props) => {
+        return (
+            <View style={styles.errorContainer}>
+                <View style={styles.mssgBox}>
+                    <Text style={styles.errorTitle}>Oops! Something went wrong...</Text>
+                    <Text style={styles.errormssg}>{props.mssg}</Text>
+                    <TouchableOpacity onPress={() => checkInternet()} style={styles.button}>
+                        <Text style={styles.errorBtnText}>Refresh</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
             {
                 isConnected == false ?
-                    <RenderError mssg={'No internet connection'} homeState={true} />
+                    <Refresh mssg='No internet connection' />
                     :
                     errorMssg ?
                         <RenderError mssg={'There was an error in fetching data'} />
@@ -86,5 +107,11 @@ const Even = ({ navigation }) => {
         </View>
     )
 }
+
+
+
+
+
+
 
 export default Even

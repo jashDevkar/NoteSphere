@@ -1,3 +1,7 @@
+import Home from "../Components/Home"
+import Download from "../Components/Download"
+import Settings from "../Components/Settings"
+
 const YearList=[
     {id:1,title:'First year of engineering (FE)',year:'FE'},
     {id:2,title:'Second year of engineering (SE)',year:'SE'},
@@ -14,4 +18,9 @@ const NoteList=[
     {id:4,title:'Equations',},
 ]
 
-export {YearList,NoteList} 
+const TabBarScreens=[
+    {name:'Home',comp:Home,icon:require('../../Assets/Images/home.png'),label:'home'},
+    // {name:'Downloads',comp:Download,icon:require('../../Assets/Images/downloads.png')},
+    {name:'Settings',comp:Settings,icon:require('../../Assets/Images/setting.png')}
+]
+export {YearList,NoteList,TabBarScreens} 

@@ -23,6 +23,17 @@ const Odd = ({ navigation }) => {
         ignoreAndroidSystemSettings: false,
     };
 
+    const checkInternet = async () => {
+        const state = await NetInfo.fetch();
+        if (state.isConnected == false) {
+            setIsConnected(state.isConnected)
+
+        }
+        else if (state.isConnected == true) {
+            setIsConnected(state.isConnected)
+        }
+    }
+
     useEffect(() => {
         try {
             const getData = async () => {
@@ -33,18 +44,8 @@ const Odd = ({ navigation }) => {
                 setSubjectData(mydata[semType]);
 
             }
-            const checkInternet = async () => {
-                const state = await NetInfo.fetch();
-                if (state.isConnected == false) {
-                    setIsConnected(state.isConnected)
-                    return false
-                }
-                else if (state.isConnected == true) {
-                    setIsConnected(state.isConnected)
-                    return true
-                }
-            };
-            if (checkInternet()) {
+            checkInternet()
+            if (isConnected) {
                 getData()
             }
         } catch (error) {
@@ -52,13 +53,28 @@ const Odd = ({ navigation }) => {
             console.log('error fetching data ', error)
         }
 
-    }, [])
+    }, [isConnected])
+
+
+    const Refresh = (props) => {
+        return (
+            <View style={styles.errorContainer}>
+                <View style={styles.mssgBox}>
+                    <Text style={styles.errorTitle}>Oops! Something went wrong...</Text>
+                    <Text style={styles.errormssg}>{props.mssg}</Text>
+                    <TouchableOpacity onPress={() => checkInternet()} style={styles.button}>
+                        <Text style={styles.errorBtnText}>Refresh</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
             {
                 isConnected == false ?
-                    <RenderError mssg={'No internet connection'} homeState={true} />
+                    <Refresh mssg='No internet connection' />
                     :
                     errorMssg ?
                         <RenderError mssg={'There was an error in fetching data'} />

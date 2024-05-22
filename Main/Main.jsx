@@ -29,7 +29,7 @@ const Main = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 {
-                    user ? <Stack.Screen name='MainComp' component={Navigation} options={{ headerShown: false }} />
+                    user ? <Stack.Screen name='MainApp' component={Navigation} options={{ headerShown: false }} />
                         :
                         <Stack.Screen name='Signin' component={Signin} />
                 }
