@@ -44,8 +44,10 @@ const Odd = ({ navigation }) => {
                 setSubjectData(mydata[semType]);
 
             }
-            checkInternet()
-            if (isConnected) {
+            if (!isConnected) {
+                checkInternet()
+            }
+            else {
                 getData()
             }
         } catch (error) {

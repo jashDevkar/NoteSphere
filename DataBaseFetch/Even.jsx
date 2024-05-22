@@ -50,7 +50,7 @@ const Even = ({ navigation }) => {
             if (!isConnected) {
                 checkInternet();
             }
-            if (isConnected) {
+            else {
                 getData();
             }
 

@@ -47,7 +47,7 @@ const Chapters = ({ navigation }) => {
             if (!isConnected) {
                 checkInternet()
             }
-            if (isConnected){
+            else{
                 getData()
             }
 
