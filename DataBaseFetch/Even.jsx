@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
-import React, { useEffect, useMemo, useState } from 'react'
+import { View, Text, TouchableOpacity, Image, ScrollView, Animated, Easing } from 'react-native'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRoute } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore'
 import RenderError from './RenderError';
@@ -37,6 +37,23 @@ const Even = ({ navigation }) => {
         }
     }
 
+    const position = new Animated.ValueXY({ x: 0, y: 120 })
+    const fadeIn = new Animated.Value(0);
+
+
+
+    Animated.timing(fadeIn, {
+        toValue: 1,
+        useNativeDriver: true,
+        duration: 300,
+    }).start();
+    Animated.spring(position, {
+        toValue: { x: 0, y: 0 },
+        useNativeDriver: true,
+        bounciness: 10
+
+    }).start();
+
     useEffect(() => {
         try {
             const getData = async () => {
@@ -58,6 +75,8 @@ const Even = ({ navigation }) => {
             setErrorMssg(true)
             console.log('error fetching data ', error)
         }
+
+
 
     }, [isConnected])
 
@@ -88,7 +107,7 @@ const Even = ({ navigation }) => {
                             <Activity />
                             :
                             <ScrollView>
-                                <View style={styles.container}>
+                                <View style={[styles.container]}>
                                     {
                                         subjectData.map((item, index) =>
                                             <TouchableOpacity key={index} style={styles.card2}

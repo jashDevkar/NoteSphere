@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex-start',
         marginBottom: 32,
-        elevation: 16,
+        elevation: 4,
         paddingLeft: 56,
 
 
@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
     cardText: {
         color: "#000000",
         fontSize:14.5,
-        fontWeight:'bold',
-        fontStyle:'italic'
+        fontWeight:'500',
     },
     rightArrow: {
         width: 64,
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 32,
-        elevation: 16,
+        elevation: 4,
     },
     loadingContainer:{
         flex:1,
@@ -118,23 +117,27 @@ const styles = StyleSheet.create({
         backgroundColor:'red',
         padding:10,
         width:160,
-        justifyContent:'space-around',
-        elevation:12,
+        justifyContent:'center',
+        elevation:4,
         borderRadius:8,
+        textAlign:'center',
         
      },
      signOutTxt:{
-        color:'white'
+        color:'white',
+        textAlign:'center',
+
      },
      infoCard:{
         backgroundColor:'white',
-        elevation:8,
+        elevation:4,
         padding:20,
         borderRadius:10,
         gap:10
      },
      infoTxt:{
-        color:'black'
+        color:'black',
+        fontWeight:'500'
      }
 
 

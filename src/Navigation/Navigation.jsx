@@ -31,10 +31,7 @@ const StackNav = () => {
                 options={{
                     headerTitle: 'Notes Sphere',
                     headerTitleStyle: {
-                        color: 'black',
-                        fontWeight: '400',
-                        fontFamily: 'Roboto-Regular',
-
+                       ...styles.headerTitle
                     },
                 }} />
 
@@ -78,7 +75,7 @@ const BottomNav = () => {
                     color: 'grey',
                 },
                 tabBarLabel: ({ focused }) => (
-                    <Text style={{ fontSize: 12, color: focused ? 'black' : '#A9A9A9' }}>
+                    <Text style={{ fontSize: 12, color: focused ? 'black' : '#c0c0c0' }}>
                         {route.name}
                     </Text>
                 ),
@@ -94,7 +91,7 @@ const BottomNav = () => {
                         options={{
                             tabBarIcon: ({ focused }) => (
                                 <Image source={item.icon}
-                                    style={[styles.bottom_image, { tintColor: focused ? 'black' : '#A9A9A9' }]} />
+                                    style={[styles.bottom_image, { tintColor: focused ? 'black' : '#c0c0c0' }]} />
 
                             ),
                         }}
@@ -129,13 +126,18 @@ const styles = StyleSheet.create({
         right: 24,
         borderRadius: 32,
         paddingVertical:'0.5%',
-        elevation: 4,
+        elevation:4,
         height:60,
 
     },
     homeImg:{
         height:24,
         width:24
+    },
+    headerTitle:{
+        color:'#000000',
+        fontWeight:'400',
+      
     }
 })
 

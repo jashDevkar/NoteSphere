@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, Image, ScrollView, Animated } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRoute } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore'
 import RenderError from './RenderError';
@@ -33,6 +33,14 @@ const Odd = ({ navigation }) => {
             setIsConnected(state.isConnected)
         }
     }
+    const position =useRef(new Animated.ValueXY({ x: 0, y: 120 })).current
+    
+    Animated.spring(position, {
+        toValue: { x: 0, y: 0 },
+        useNativeDriver: true,
+        bounciness: 10
+
+    }).start();
 
     useEffect(() => {
         try {
@@ -85,7 +93,7 @@ const Odd = ({ navigation }) => {
                             <Activity />
                             :
                             <ScrollView>
-                                <View style={styles.container}>
+                                <Animated.View style={[styles.container,{transform:[{translateX:position.x},{translateY:position.y}]}]}>
                                     {
                                         subjectData.map((item, index) =>
                                             <TouchableOpacity key={index} style={styles.card2}
@@ -97,7 +105,7 @@ const Odd = ({ navigation }) => {
                                                 <Image style={styles.rightArrow} source={require('../Assets/Images/right.png')} />
                                             </TouchableOpacity>)
                                     }
-                                </View>
+                                </Animated.View>
                             </ScrollView>
             }
         </View>

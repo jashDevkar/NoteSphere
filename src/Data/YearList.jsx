@@ -1,6 +1,6 @@
 import Home from "../Components/Home"
 import Download from "../Components/Download"
-import Settings from "../Components/Settings"
+import Profile from "../Components/Profile"
 
 const YearList=[
     {id:1,title:'First year of engineering (FE)',year:'FE'},
@@ -21,6 +21,6 @@ const NoteList=[
 const TabBarScreens=[
     {name:'Home',comp:Home,icon:require('../../Assets/Images/home.png'),label:'home'},
     // {name:'Downloads',comp:Download,icon:require('../../Assets/Images/downloads.png')},
-    {name:'Settings',comp:Settings,icon:require('../../Assets/Images/setting.png')}
+    {name:'Profile',comp:Profile,icon:require('../../Assets/Images/user.png')}
 ]
 export {YearList,NoteList,TabBarScreens} 

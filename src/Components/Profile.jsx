@@ -6,7 +6,7 @@ import styles from '../../Style/Styles';
 import NetInfo from '@react-native-community/netinfo'
 
 
-const Settings = () => {
+const Profile = () => {
 
   const [time, setTime] = useState(null)
   const [isConnected, setIsConnected] = useState(false)
@@ -37,7 +37,7 @@ const Settings = () => {
   return (
 
 
-    <View style={{ flex: 1, alignItems: 'center', gap: 16, backgroundColor: '#F5F5F5',justifyContent:'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', gap: 16, backgroundColor: '#F5F5F5', justifyContent: 'center' }}>
       <View style={styles.infoCard}>
         {
           isConnected ?
@@ -53,9 +53,11 @@ const Settings = () => {
           <Text style={styles.infoTxt}>last sign In :- {time}</Text>
         </View>
       </View>
+
       <TouchableOpacity onPress={() => signOut()} style={styles.signOut}>
         <Text style={styles.signOutTxt}>Sign Out</Text>
       </TouchableOpacity>
+
 
     </View>
 
@@ -63,4 +65,4 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default Profile
