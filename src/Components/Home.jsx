@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView, Image, Animated, Easing } from 'react-native'
-import React from 'react'
+import React, { useRef } from 'react'
 import { YearList } from '../Data/YearList'
 import styles from '../../Style/Styles'
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
@@ -8,11 +8,11 @@ import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 const Home = ({ navigation }) => {
 
 
-  const position = new Animated.ValueXY({ x: 0, y: 120 })
+  const position =  useRef(new Animated.ValueXY({ x: 0, y: 120 })).current //it is reference to animated class
   Animated.spring(position, {
     toValue: { x: 0, y: 0 },
-    bounciness: 10,
-    speed:8,
+    bounciness: 12,
+    speed:5,
     useNativeDriver: true,
 
   }).start();

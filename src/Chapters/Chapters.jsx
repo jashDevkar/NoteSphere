@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, Image, ScrollView, Animated } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import firestore from '@react-native-firebase/firestore'
 import styles from '../../Style/Styles'
@@ -22,6 +22,15 @@ const Chapters = ({ navigation }) => {
         ignoreAndroidSystemSettings: false,
     };
 
+
+    const position = useRef(new Animated.ValueXY({ x: 0, y: 120 })).current //it is reference to animated class
+    Animated.spring(position, {
+        toValue: { x: 0, y: 0 },
+        bounciness: 12,
+        speed: 5,
+        useNativeDriver: true,
+
+    }).start();
 
     const checkInternet = async () => {
         const state = await NetInfo.fetch();
@@ -47,7 +56,7 @@ const Chapters = ({ navigation }) => {
             if (!isConnected) {
                 checkInternet()
             }
-            else{
+            else {
                 getData()
             }
 
@@ -57,7 +66,7 @@ const Chapters = ({ navigation }) => {
         }
     }, [isConnected])
 
-    
+
 
 
     const Refresh = (props) => {
@@ -92,7 +101,7 @@ const Chapters = ({ navigation }) => {
                                 <RenderError mssg={mssg} homeState={false} />
                                 :
                                 <ScrollView style={{ backgroundColor: '#f5f5f5' }}>
-                                    <View style={styles.container}>
+                                    <Animated.View style={[styles.container,{transform:[{translateX:position.x},{translateY:position.y}]}]}>
                                         {
                                             pdfData.map((item, index) => (
                                                 <TouchableOpacity key={index} onPress={() => {
@@ -104,7 +113,7 @@ const Chapters = ({ navigation }) => {
                                                 </TouchableOpacity>
                                             ))
                                         }
-                                    </View>
+                                    </Animated.View>
                                 </ScrollView>
             }
         </View>

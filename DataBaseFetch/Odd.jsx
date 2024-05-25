@@ -38,7 +38,7 @@ const Odd = ({ navigation }) => {
     Animated.spring(position, {
         toValue:{x:0,y:0},
         bounciness: 10,
-        speed: 8,
+        speed: 5,
         useNativeDriver: true,
 
     }).start();
