@@ -33,12 +33,13 @@ const Odd = ({ navigation }) => {
             setIsConnected(state.isConnected)
         }
     }
-    const position =useRef(new Animated.ValueXY({ x: 0, y: 120 })).current
-    
+    const position = useRef(new Animated.ValueXY({ x: 0, y: 120 })).current
+
     Animated.spring(position, {
-        toValue: { x: 0, y: 0 },
+        toValue:{x:0,y:0},
+        bounciness: 10,
+        speed: 8,
         useNativeDriver: true,
-        bounciness: 10
 
     }).start();
 
@@ -93,7 +94,7 @@ const Odd = ({ navigation }) => {
                             <Activity />
                             :
                             <ScrollView>
-                                <Animated.View style={[styles.container,{transform:[{translateX:position.x},{translateY:position.y}]}]}>
+                                <Animated.View style={[styles.container, { transform: [{ translateX: position.x }, { translateY: position.y }] }]}>
                                     {
                                         subjectData.map((item, index) =>
                                             <TouchableOpacity key={index} style={styles.card2}

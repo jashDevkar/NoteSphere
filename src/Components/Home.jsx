@@ -11,9 +11,12 @@ const Home = ({ navigation }) => {
   const position = new Animated.ValueXY({ x: 0, y: 120 })
   Animated.spring(position, {
     toValue: { x: 0, y: 0 },
-    bounciness:10,
-    useNativeDriver: true
+    bounciness: 10,
+    speed:8,
+    useNativeDriver: true,
+
   }).start();
+
   const options = {
     enableVibrateFallback: true,
     ignoreAndroidSystemSettings: false,
@@ -22,14 +25,10 @@ const Home = ({ navigation }) => {
 
     <ScrollView style={{ backgroundColor: '#F5F5F5' }}>
 
-      <Animated.View style={[styles.container]}>
+      <Animated.View style={[styles.container, { transform: [{ translateX: position.x }, { translateY: position.y }] }]}>
         {
           YearList.map((item, index) => (
-            <TouchableOpacity style={[styles.card,
-            {
-              transform: [{ translateX: position.x }, { translateY: position.y }]
-              ,
-            }]} onPress={() => {
+            <TouchableOpacity style={[styles.card]} onPress={() => {
               navigation.navigate('Notes', {
                 year: item['year'],
                 feedBack: options
@@ -42,7 +41,7 @@ const Home = ({ navigation }) => {
 
           ))
         }
-        <TouchableOpacity style={[styles.card2,{transform:[{translateX:position.x},{translateY:position.y}]}]} onPress={() => {
+        <TouchableOpacity style={[styles.card2,]} onPress={() => {
           navigation.navigate('About-Us')
           ReactNativeHapticFeedback.trigger("effectClick", options);
         }} >
