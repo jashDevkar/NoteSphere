@@ -6,7 +6,6 @@ import auth from '@react-native-firebase/auth';
 import Signin from '../Google/Signin'
 import Splash from '../Splash/Splash';
 
-
 const Stack = createNativeStackNavigator()
 const Main = () => {
     const [user, setUser] = useState(null);
